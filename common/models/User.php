@@ -32,7 +32,8 @@ class User extends ActiveRecord implements IdentityInterface {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
 
-    public $new_password, $confirm_password;
+    public $new_password;
+    public $confirm_password;
 
     /**
      * @inheritdoc
@@ -57,9 +58,10 @@ class User extends ActiveRecord implements IdentityInterface {
         return [
             [['username', 'name'], 'required'],
             [['role', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'name', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['username', 'name', 'password_hash', 'password_reset_token', 'email', 'new_password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
-            [['new_password', 'confirm_password'], 'compare'],
+            [['confirm_password'], 'compare', 'compareAttribute' => 'new_password'],
+//            [['new_password', 'confirm_password'], 'compare'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_INACTIVE, self::STATUS_ACTIVE]],
         ];

@@ -42,9 +42,23 @@ class UserController extends BaseController {
     public function actionProfile() {
         $model = $this->findModel(Yii::$app->user->identity->id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->save();
-            return $this->refresh();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->setAttributes(Yii::$app->request->post());
+            echo '<pre>';
+            print_r(Yii::$app->request->post());
+
+            $valid = $model->validate();
+            echo $model->new_password;
+//            echo $model->confirm_password;
+            if($valid){
+                $model->save();
+                return $this->refresh();
+            }else{
+                echo '<pre>';
+                print_r($model->getErrors());
+                
+                exit;
+            }
         }
 
         return $this->render('profile', ['model' => $model]);

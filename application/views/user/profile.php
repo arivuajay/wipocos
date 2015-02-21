@@ -19,8 +19,8 @@ $this->params['breadcrumbs'] = ['My Profile'];
             <div class="box-body">
                 <?= $form->field($model, 'username') ?>
                 <?= $form->field($model, 'name') ?>
-                <?= $form->field($model, 'new_password') ?>
-                <?= $form->field($model, 'confirm_password') ?>
+                <?= $form->field($model, 'new_password')->passwordInput() ?>
+                <?= $form->field($model, 'confirm_password')->passwordInput() ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">

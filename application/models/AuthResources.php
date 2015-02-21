@@ -57,8 +57,8 @@ class AuthResources extends \yii\db\ActiveRecord
         return [
             'Master_Resource_ID' => 'Master  Resource  ID',
             'Master_User_ID' => 'Master  User  ID',
-            'Master_Role_ID' => 'Master  Role  ID',
-            'Master_Module_ID' => 'Master  Module  ID',
+            'Master_Role_ID' => 'Role Name',
+            'Master_Module_ID' => 'Module',
             'Master_Screen_ID' => 'Master  Screen  ID',
             'Master_Task_ADD' => 'Master  Task  Add',
             'Master_Task_SEE' => 'Master  Task  See',

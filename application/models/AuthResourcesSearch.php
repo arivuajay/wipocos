@@ -10,13 +10,12 @@ use application\models\AuthResources;
 /**
  * AuthResourcesSearch represents the model behind the search form about `application\models\AuthResources`.
  */
-class AuthResourcesSearch extends AuthResources
-{
+class AuthResourcesSearch extends AuthResources {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['Master_Resource_ID', 'Master_User_ID', 'Master_Role_ID', 'Master_Module_ID', 'Master_Screen_ID'], 'integer'],
             [['Master_Task_ADD', 'Master_Task_SEE', 'Master_Task_UPT', 'Master_Task_DEL', 'Created_Date', 'Rowversion'], 'safe'],
@@ -27,8 +26,7 @@ class AuthResourcesSearch extends AuthResources
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,8 +38,7 @@ class AuthResourcesSearch extends AuthResources
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = AuthResources::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -68,10 +65,11 @@ class AuthResourcesSearch extends AuthResources
         ]);
 
         $query->andFilterWhere(['like', 'Master_Task_ADD', $this->Master_Task_ADD])
-            ->andFilterWhere(['like', 'Master_Task_SEE', $this->Master_Task_SEE])
-            ->andFilterWhere(['like', 'Master_Task_UPT', $this->Master_Task_UPT])
-            ->andFilterWhere(['like', 'Master_Task_DEL', $this->Master_Task_DEL]);
+                ->andFilterWhere(['like', 'Master_Task_SEE', $this->Master_Task_SEE])
+                ->andFilterWhere(['like', 'Master_Task_UPT', $this->Master_Task_UPT])
+                ->andFilterWhere(['like', 'Master_Task_DEL', $this->Master_Task_DEL]);
 
         return $dataProvider;
     }
+
 }

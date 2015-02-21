@@ -8,6 +8,7 @@ use application\models\AuthResourcesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use application\models\MasterScreen;
 
 /**
  * AuthResourcesController implements the CRUD actions for AuthResources model.
@@ -32,6 +33,14 @@ class AuthResourcesController extends Controller
             $model->Master_Role_ID = $rid;
 
         return $this->render('role_base',['model' => $model]);
+    }
+    
+    public function actionUser($uid = null) {
+        $model = new AuthResources();
+        if($uid)
+            $model->Master_User_ID = $uid;
+
+        return $this->render('user_base',['model' => $model]);
     }
 
     /**
@@ -127,14 +136,42 @@ class AuthResourcesController extends Controller
         }
     }
 
-    public function actionGetScreensByModule($mid) {
+    public function actionGetScreensByModule() {
+        $mid = $id = $type = '';
+        if($_GET['mid'] && $_GET['id'] && $_GET['type']){
+            $mid = $_GET['mid'];
+            $id = $_GET['id'];
+            $type = $_GET['type'];
+        }
+        $model = new AuthResources();
+        $masters = MasterScreen::find()->where('Module_ID = :mid', [':mid' => $mid])->all();
+        if($type == 'role'){
+            $exist_resources = AuthResources::find()->joinWith(['masterScreen'])->where('Master_Module_ID = :mid And Master_Role_ID = :rid', [':mid' => $mid, ':rid' => $id])->all();
+        }elseif ($type == 'user') {
+            $exist_resources = AuthResources::find()->joinWith(['masterScreen'])->where('Master_Module_ID = :mid And Master_User_ID = :uid', [':mid' => $mid, ':uid' => $id])->all();
+        }
 
-//        <tr>
-//                            <td align="center">Country</td>
-//                            <td align="center"><input type="checkbox" /></td>
-//                            <td align="center"><input type="checkbox" /></td>
-//                            <td align="center"><input type="checkbox" /></td>
-//                            <td align="center"><input type="checkbox" /></td>
-//                        </tr>
+        if ($model->load(Yii::$app->request->post())) {
+            $post = Yii::$app->request->post();
+            $valid = true;
+            foreach ($post['AuthResources'] as $data) {
+                $model = empty($exist_resources) ? new AuthResources : $this->findModel($data['Master_Resource_ID']);
+                $model->setAttributes($data);
+                $valid = $model->save() && $valid;
+            }
+            if($valid){
+                Yii::$app->getSession()->setFlash('success', 'Changes saved successfully');
+                $action = isset($data['Master_User_ID']) ? 'user' : 'role';
+                return $this->redirect([$action.'/index']);
+            }
+        } else {
+            return $this->renderPartial('_screen_by_module', [
+                    'masters' => $masters,
+                    'exist_resources' => $exist_resources,
+                    'model' => $model,
+                    'id' => $id,
+                    'type' => $type
+            ]);
+        }
     }
 }
