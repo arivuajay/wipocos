@@ -1,15 +1,7 @@
 <?php
 
-return [
+$config = [
     'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
-            'tablePrefix' => 'wipo_',
-        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
@@ -28,3 +20,24 @@ return [
         ],
     ],
 ];
+if (!YII_ENV_PROD) {
+    $config['components']['db'] = [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'tablePrefix' => 'wipo_',
+    ];
+} else {
+    $config['components']['db'] = [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=rajencba_wipocos',
+        'username' => 'rajencba_wipocos',
+        'password' => '62)VznT1QZTU',
+        'charset' => 'utf8',
+        'tablePrefix' => 'wipo_',
+    ];
+}
+
+return $config;
