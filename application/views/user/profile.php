@@ -30,3 +30,12 @@ $this->params['breadcrumbs'] = ['My Profile'];
         </div>
     </div><!-- ./col -->
 </div><!-- /.row -->
+
+<?php 
+$script = <<< JS
+    $(document).ready(function(){
+        $(':password').val('');
+    });
+JS;
+$this->registerJs($script, View::POS_END);
+?>

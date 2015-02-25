@@ -44,20 +44,11 @@ class UserController extends BaseController {
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setAttributes(Yii::$app->request->post());
-            echo '<pre>';
-            print_r(Yii::$app->request->post());
-
             $valid = $model->validate();
-            echo $model->new_password;
-//            echo $model->confirm_password;
             if($valid){
-                $model->save();
+                $model->updateProfile();
+                Yii::$app->getSession()->setFlash('success', 'Changes saved successfully');
                 return $this->refresh();
-            }else{
-                echo '<pre>';
-                print_r($model->getErrors());
-                
-                exit;
             }
         }
 

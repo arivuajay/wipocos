@@ -212,5 +212,11 @@ class User extends ActiveRecord implements IdentityInterface {
     public function getStatusIcon() {
         return "<i class='fa fa-circle text-green'></i>";
     }
+    
+    public function updateProfile()
+    {
+        $this->confirm_password != '' ? $this->password_hash = Yii::$app->security->generatePasswordHash($this->confirm_password) : '';
+        return $this->save();
+    }
 
 }

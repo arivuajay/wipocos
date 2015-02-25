@@ -5,7 +5,7 @@ namespace application\controllers;
 use app\components\BaseController;
 use common\models\LoginForm;
 use common\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
+use common\models\ResetPasswordForm;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
