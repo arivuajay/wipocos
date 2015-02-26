@@ -50,12 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
                      <?= Html::submitButton('Search', ['class' => 'btn btn-primary form-control']) ?>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-2">
+<!--            <div class="col-lg-2 col-md-2">
                 <div class="form-group">
                     <label>&nbsp;</label>
                      <?= Html::resetButton('Reset', ['class' => 'btn btn-default form-control']) ?>
                 </div>
-            </div>
+            </div>-->
             <?php ActiveForm::end(); ?>
 
         </div>
