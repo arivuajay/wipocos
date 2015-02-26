@@ -56,7 +56,8 @@ class User extends ActiveRecord implements IdentityInterface {
      */
     public function rules() {
         return [
-            [['username', 'name'], 'required'],
+            [['username', 'name', 'email'], 'required'],
+            [['username', 'email'], 'unique'],
             [['role', 'status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'name', 'password_hash', 'password_reset_token', 'email', 'new_password'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -217,6 +218,13 @@ class User extends ActiveRecord implements IdentityInterface {
     {
         $this->confirm_password != '' ? $this->password_hash = Yii::$app->security->generatePasswordHash($this->confirm_password) : '';
         return $this->save();
+    }
+    
+    public function createUser($valid = true)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->security->generateRandomString(9));
+        $this->generateAuthKey();
+        return $this->save($valid);
     }
 
 }

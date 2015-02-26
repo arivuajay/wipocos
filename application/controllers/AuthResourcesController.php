@@ -2,13 +2,14 @@
 
 namespace application\controllers;
 
-use Yii;
 use application\models\AuthResources;
 use application\models\AuthResourcesSearch;
+use application\models\MasterScreen;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use application\models\MasterScreen;
 
 /**
  * AuthResourcesController implements the CRUD actions for AuthResources model.
@@ -18,6 +19,16 @@ class AuthResourcesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['role', 'get-screens-by-module'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -2,12 +2,13 @@
 
 namespace application\controllers;
 
-use Yii;
 use application\models\MasterRole;
 use application\models\MasterRoleSearch;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RoleController implements the CRUD actions for MasterRole model.
@@ -17,6 +18,20 @@ class RoleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [''],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -30,7 +30,7 @@ class UserController extends BaseController {
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['profile','index','create','update'],
+                        'actions' => ['profile', 'index', 'create', 'update', 'search', 'sendemail'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -45,7 +45,7 @@ class UserController extends BaseController {
         if ($model->load(Yii::$app->request->post())) {
             $model->setAttributes(Yii::$app->request->post());
             $valid = $model->validate();
-            if($valid){
+            if ($valid) {
                 $model->updateProfile();
                 Yii::$app->getSession()->setFlash('success', 'Changes saved successfully');
                 return $this->refresh();
@@ -55,18 +55,27 @@ class UserController extends BaseController {
         return $this->render('profile', ['model' => $model]);
     }
 
-     /**
+    /**
      * Lists all User models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionSearch() {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -75,10 +84,9 @@ class UserController extends BaseController {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -87,17 +95,19 @@ class UserController extends BaseController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $valid = $model->validate();
+            if ($valid) {
+                $model->createUser(false);
+                return $this->redirect(['index']);
+            }
         }
+        return $this->render('create', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -106,17 +116,19 @@ class UserController extends BaseController {
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $valid = $model->validate();
+            if ($valid) {
+                $model->createUser(false);
+                return $this->redirect(['index']);
+            }
         }
+        return $this->render('update', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -125,8 +137,7 @@ class UserController extends BaseController {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -139,13 +150,29 @@ class UserController extends BaseController {
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionSendemail() {
+        echo \Yii::$app->params['supportEmail'];
+        $mail = \Yii::$app->mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => ''])
+//                        ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+                        ->setFrom('prakash.paramanandam@arkinfotec.com')
+                        ->setTo('prakash.paramanandam@arkinfotec.com')
+                        ->setSubject('Password reset for ' . \Yii::$app->name)
+                        ->send();
+        
+        if($mail){
+            echo 'yes';
+        }else{
+            echo 'no';
+        }
+        exit;
     }
 
 }
