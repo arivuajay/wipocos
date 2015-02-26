@@ -11,6 +11,15 @@ use yii\web\View;
 
 $this->title = $model->isNewRecord ? 'Create' : 'Update'. ' User';
 ?>
+<style type="text/css">
+    .statusfield label{
+        visibility: hidden;
+    }
+    
+    .statusfield label > div{
+        visibility: visible;
+    }
+</style>
 <!-- Small boxes (Stat box) -->
 <div class="row">
     <div class="col-lg-12 col-xs-12">
@@ -50,7 +59,7 @@ $this->title = $model->isNewRecord ? 'Create' : 'Update'. ' User';
                 
                 <div class="form-group">
                     <?= Html::activeLabel($model, 'status', ['class' => 'col-sm-2 control-label']) ?>
-                    <div class="col-sm-5">
+                    <div class="col-sm-5 statusfield">
                         <?= $form->field($model, 'status', ['showLabels' => false])->checkbox()->label(FALSE); ?>
                     </div>
                 </div>
