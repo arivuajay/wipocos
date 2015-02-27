@@ -23,7 +23,7 @@ class AuthResourcesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['role', 'get-screens-by-module', 'user'],
+                        'actions' => ['role', 'get-screens-by-module', 'user', 'index', 'create', 'delete', 'view', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

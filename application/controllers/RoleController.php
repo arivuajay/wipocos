@@ -5,6 +5,7 @@ namespace application\controllers;
 use application\models\MasterRole;
 use application\models\MasterRoleSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -48,11 +49,26 @@ class RoleController extends Controller
     public function actionIndex()
     {
         $searchModel = new MasterRoleSearch();
+        $search = false;
+        if(isset(Yii::$app->request->queryParams['MasterRoleSearch'])){
+            foreach (Yii::$app->request->queryParams['MasterRoleSearch'] as $key => $value) {
+                if($value != ''){
+                    $search = true;
+                    break;
+                }
+            }
+        }
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderAll = new ActiveDataProvider([
+            'query' => MasterRole::find(),
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProviderAll' => $dataProviderAll,
+            'search' => $search
         ]);
     }
 

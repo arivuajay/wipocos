@@ -31,7 +31,7 @@ class UserController extends BaseController {
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['profile', 'index', 'create', 'update', 'search', 'sendemail', 'view'],
+                        'actions' => ['profile', 'index', 'create', 'update', 'search', 'sendemail', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
