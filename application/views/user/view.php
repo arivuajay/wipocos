@@ -6,13 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->name;
+$this->title = 'View User #'.$model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -31,14 +31,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'name',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
+//            'auth_key',
+//            'password_hash',
+//            'password_reset_token',
             'email:email',
-            'role',
-            'status',
-            'created_at',
-            'updated_at',
+            [
+                'label' => $model->getAttributeLabel('role'),
+                'value' => $model->roleMdl->Description,
+            ],
+            [
+                'label' => $model->getAttributeLabel('status'),
+                'value' => $model->status == '1' ? 'Active' : 'In-Active'
+            ],
+//            [
+//                'label' => $model->getAttributeLabel('created_at'),
+//                'value' => date('Y-m-d H:i:s', strtotime($model->created_at))
+//            ],
+//            [
+//                'label' => $model->getAttributeLabel('updated_at'),
+//                'value' => date('Y-m-d H:i:s', strtotime($model->updated_at))
+//            ],
         ],
     ]) ?>
 

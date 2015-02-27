@@ -6,6 +6,7 @@ use app\components\BaseController;
 use common\models\User;
 use common\models\UserSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -30,7 +31,7 @@ class UserController extends BaseController {
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['profile', 'index', 'create', 'update', 'search', 'sendemail'],
+                        'actions' => ['profile', 'index', 'create', 'update', 'search', 'sendemail', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -61,11 +62,26 @@ class UserController extends BaseController {
      */
     public function actionIndex() {
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $search = false;
+        if(isset(Yii::$app->request->queryParams['UserSearch'])){
+            foreach (Yii::$app->request->queryParams['UserSearch'] as $key => $value) {
+                if($value != ''){
+                    $search = true;
+                    break;
+                }
+            }
+        }
 
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderAll = new ActiveDataProvider([
+            'query' => User::find(),
+        ]);
+        
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'dataProviderAll' => $dataProviderAll,
+            'search' => $search
         ]);
     }
     
@@ -122,7 +138,7 @@ class UserController extends BaseController {
         if ($model->load(Yii::$app->request->post())) {
             $valid = $model->validate();
             if ($valid) {
-                $model->createUser(false);
+                $model->updateUser(false);
                 return $this->redirect(['index']);
             }
         }
@@ -159,19 +175,12 @@ class UserController extends BaseController {
     }
 
     public function actionSendemail() {
-        echo \Yii::$app->params['supportEmail'];
-        $mail = \Yii::$app->mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => ''])
-//                        ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
-                        ->setFrom('prakash.paramanandam@arkinfotec.com')
-                        ->setTo('prakash.paramanandam@arkinfotec.com')
-                        ->setSubject('Password reset for ' . \Yii::$app->name)
-                        ->send();
-        
-        if($mail){
-            echo 'yes';
-        }else{
-            echo 'no';
-        }
+        Yii::$app->mailer->compose()
+                ->setFrom('noreply@wipocos.com')
+                ->setTo('prakash.paramanandam@arkinfotec.com')
+                ->setSubject('test')
+                ->setHtmlBody('test')
+                ->send();
         exit;
     }
 

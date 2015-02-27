@@ -34,7 +34,8 @@ class MasterRole extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Role_Code'], 'required'],
+            [['Role_Code', 'Description'], 'required'],
+            [['Role_Code'], 'unique'],
             [['is_Admin'], 'string'],
             [['Active'], 'boolean'],
             [['Created_Date', 'Rowversion'], 'safe'],

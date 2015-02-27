@@ -9,7 +9,7 @@ use yii\web\View;
 
 /* @var $this View */
 
-$this->title = $model->isNewRecord ? 'Create' : 'Update'. ' User';
+//$this->title = $model->isNewRecord ? 'Create' : 'Update'. ' User';
 ?>
 <style type="text/css">
     .statusfield label{

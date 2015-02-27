@@ -209,7 +209,7 @@ class User extends ActiveRecord implements IdentityInterface {
     public function getRoleMdl() {
         return $this->hasOne(MasterRole::className(), ['Master_Role_ID' => 'role']);
     }
-
+    
     public function getStatusIcon() {
         return "<i class='fa fa-circle text-green'></i>";
     }
@@ -222,8 +222,51 @@ class User extends ActiveRecord implements IdentityInterface {
     
     public function createUser($valid = true)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash(Yii::$app->security->generateRandomString(9));
+        $password = Yii::$app->security->generateRandomString(9);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
         $this->generateAuthKey();
+        
+        $url = \Yii::$app->urlManager->createAbsoluteUrl(["site/login"]);
+        $message = '<p>Dear '.$this->name.'</p>';
+        $message .= '<p>This is your login credentials for wipocus</p>';
+        $message .= '<p>Login URL: '.$url.'</p>';
+        $message .= '<p>User Name: '.$this->username.'</p>';
+        $message .= '<p>Password: '.$password.'</p>';
+        
+        Yii::$app->mailer->compose()
+            ->setFrom('noreply@wipocos.com')
+            ->setTo($this->email)
+            ->setSubject('Wipocos: New Account Created')
+            ->setHtmlBody($message)
+            ->send();
+
+        return $this->save($valid);
+    }
+    
+    public function updateUser($valid = true)
+    {
+        $old_user = User::findOne(['id' => $this->id]);
+        
+        if($old_user->email != $this->email){
+            $password = Yii::$app->security->generateRandomString(9);
+            $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+            $this->generateAuthKey();
+
+            $url = \Yii::$app->urlManager->createAbsoluteUrl(["site/login"]);
+            $message = '<p>Dear '.$this->name.'</p>';
+            $message .= '<p>This is your login credentials for wipocus</p>';
+            $message .= '<p>Login URL: '.$url.'</p>';
+            $message .= '<p>User Name: '.$this->username.'</p>';
+            $message .= '<p>Password: '.$password.'</p>';
+
+            Yii::$app->mailer->compose()
+                ->setFrom('noreply@wipocos.com')
+                ->setTo($this->email)
+                ->setSubject('Wipocos: New Account Created')
+                ->setHtmlBody($message)
+                ->send();
+        }
+
         return $this->save($valid);
     }
 
