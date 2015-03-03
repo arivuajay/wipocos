@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model application\models\MasterRole */
 
 $this->title = 'Update Master Role: ' . ' ' . $model->Master_Role_ID;
-$this->params['breadcrumbs'][] = ['label' => 'Master Roles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Security Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 $this->params['breadcrumbs'][] = $model->Master_Role_ID;
 ?>

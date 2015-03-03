@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model application\models\MasterRole */
 
 $this->title = 'View Role #'.$model->Master_Role_ID;
-$this->params['breadcrumbs'][] = ['label' => 'Master Roles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Security Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="master-role-view">
