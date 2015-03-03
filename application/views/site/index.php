@@ -118,7 +118,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
                             <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
                             Admin
                         </a>
-                        We will fix this issue as soon as possible
+                        Hi Mike Doe, We will fix this issue as soon as possible. Please wait for some hours.
                     </p>
                 </div><!-- /.item -->
                 <!-- chat item -->
