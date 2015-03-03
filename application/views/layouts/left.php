@@ -65,7 +65,7 @@ use yii\helpers\Html;
                             'itemOptions' => ['class' => 'treeview'],
                             'items' => [
                                 ['label' => '<i class="fa fa-user"></i> <span>User</span>', 'url' => ['/user/index']],
-                                ['label' => '<i class="fa fa-th"></i> <span>Roles</span>', 'url' => ['/role/index']],
+                                ['label' => '<i class="fa fa-th"></i> <span>Security Roles</span>', 'url' => ['/role/index']],
                             ],
                         ],
                     ],

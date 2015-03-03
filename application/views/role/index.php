@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel MasterRoleSearch */
 /* @var $dataProvider ActiveDataProvider */
 
-$this->title = 'Roles';
+$this->title = 'Security Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-lg-12 col-md-12">
@@ -159,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'pjax' => true,
             'panel' => [
                 'type' => GridView::TYPE_PRIMARY,
-                'heading' => '<i class="glyphicon glyphicon-book"></i>  Roles',
+                'heading' => '<i class="glyphicon glyphicon-book"></i>  Security Roles',
                 'footer' => false
             ],
             'toolbar' => []
