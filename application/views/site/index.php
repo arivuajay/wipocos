@@ -13,7 +13,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
         
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>765</h3>
+                <h3>65</h3>
                 <p>Albums</p>
             </div>
             <div class="icon">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
         
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>968</h3>
+                <h3>68</h3>
                 <p>Performer</p>
             </div>
             <div class="icon">
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
         
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>89562</h3>
+                <h3>8956</h3>
                 <p>Registered users</p>
             </div>
             <div class="icon">
@@ -96,7 +96,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
                     <p class="message">
                         <a href="#" class="name">
                             <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-                            Mike Doe
+                            User 1
                         </a>
                         Unable to log in to my account. Please fix this issue
                     </p>
@@ -118,7 +118,7 @@ $this->params['breadcrumbs'] = ['Dashboard'];
                             <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
                             Admin
                         </a>
-                        Hi Mike Doe, We will fix this issue as soon as possible. Please wait for some hours.
+                        Hi User 1, We will fix this issue as soon as possible. Please wait for our mail.
                     </p>
                 </div><!-- /.item -->
                 <!-- chat item -->
@@ -127,11 +127,9 @@ $this->params['breadcrumbs'] = ['Dashboard'];
                     <p class="message">
                         <a href="#" class="name">
                             <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-                            Susan Doe
+                            User 2
                         </a>
-                        I would like to meet you to discuss the latest news about
-                        the arrival of the new theme. They say it is going to be one the
-                        best themes on the market
+                        I would like to add more options in my account.
                     </p>
                 </div><!-- /.item -->
             </div><!-- /.chat -->
@@ -205,80 +203,16 @@ $this->params['breadcrumbs'] = ['Dashboard'];
                         <!-- checkbox -->
                         <input type="checkbox" value="" name=""/>
                         <!-- todo text -->
-                        <span class="text">Design a nice theme</span>
+                        <span class="text">Discussion about new album registration</span>
                         <!-- Emphasis label -->
-                        <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                        <small class="label label-danger"><i class="fa fa-clock-o"></i> 20 mins</small>
                         <!-- General tools such as edit or delete-->
                         <div class="tools">
                             <i class="fa fa-edit"></i>
                             <i class="fa fa-trash-o"></i>
                         </div>
                     </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name=""/>
-                        <span class="text">Make the theme responsive</span>
-                        <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name=""/>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name=""/>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name=""/>
-                        <span class="text">Check your messages and notifications</span>
-                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
-                        <input type="checkbox" value="" name=""/>
-                        <span class="text">Let theme shine like a star</span>
-                        <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                        <div class="tools">
-                            <i class="fa fa-edit"></i>
-                            <i class="fa fa-trash-o"></i>
-                        </div>
-                    </li>
+                    
                 </ul>
             </div><!-- /.box-body -->
             <div class="box-footer clearfix no-border">
